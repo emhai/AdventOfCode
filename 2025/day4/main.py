@@ -37,7 +37,6 @@ def part_1(content):
                 content[i][j] = "x"
                 counter += 1
 
-
     return counter
 
 def part_2(content):
@@ -72,14 +71,21 @@ def part_2(content):
                 if content[i][j] == 'x':
                     content[i][j] = "."
 
-    print(counter)
-    return
+    return counter
 
 def main():
+    content = get_content("input_test.txt")
+    test_1 = part_1(content)
+    test_2 = part_2(content)
+
     content = get_content("input.txt")
-    # content = get_content("input_test.txt")
-    print(part_1(content))
-    print(part_2(content))
+    res_1 = part_1(content)
+    res_2 = part_2(content)
+
+    print("RESULT TEST 1:", test_1)
+    print("RESULT 1:", res_1)
+    print("RESULT TEST 2:", test_2)
+    print("RESULT 2:", res_2)
 
 if __name__ == '__main__':
     main()
