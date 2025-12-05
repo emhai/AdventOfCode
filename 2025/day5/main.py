@@ -1,4 +1,3 @@
-import os
 
 def get_content(file_name):
     f = open(file_name)
@@ -8,11 +7,78 @@ def get_content(file_name):
 
 def part_1(content):
 
-    return
+    fresh_low = []
+    fresh_high = []
+    counter = 0
+    for line in content:
+        if len(line) == 0:
+            continue
+
+        if "-" in line:
+            low, up = line.split("-")
+            fresh_low.append(int(low))
+            fresh_high.append(int(up))
+        else:
+            for i in range(len(fresh_low)):
+                if fresh_low[i] < int(line) <= fresh_high[i]:
+                    counter += 1
+                    break
+
+    return counter
+
 
 def part_2(content):
 
-    return
+    fresh_low = []
+    fresh_high = []
+    for line in content:
+        if "-" not in line:
+            continue
+        low, high = line.split("-")
+        low, high = int(low), int(high)
+        fresh_low.append(low)
+        fresh_high.append(high)
+
+    lows, highs = (list(t) for t in zip(*sorted(zip(fresh_low, fresh_high))))
+    print(lows)
+    print(highs)
+    done = False
+    freshs = []
+    i = 0
+    while not done:
+        if i >= len(lows):
+            done = True
+            continue
+
+        high = highs[i]
+        low = lows[i]
+        j = i
+        while True:
+            j += 1
+            if j >= len(lows):
+                done = True
+                j = len(lows) - 1
+                break
+
+            if high < lows[j]:
+                j -= 1
+                break
+
+            if high < highs[j]:
+                high = max(high, highs[j])
+
+
+
+        freshs.append((low, max(high, highs[j])))
+        i = j + 1
+
+    counter = 0
+    print(freshs)
+    for fresh_range in freshs:
+        amount = fresh_range[1] - fresh_range[0] + 1
+        counter += amount
+
+    return counter
 
 def main():
     content = get_content("input_test.txt")
