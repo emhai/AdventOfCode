@@ -76,7 +76,6 @@ def part_1(content, amount):
             counter += 1
             connections += 1
 
-    print("sorting")
     res = [k for k, v in sorted(circuits.items(), reverse=True, key=lambda item: len(item[1]))]
     mult = 1
     for i in range(3):
