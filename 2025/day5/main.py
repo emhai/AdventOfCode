@@ -67,8 +67,6 @@ def part_2(content):
             if high < highs[j]:
                 high = max(high, highs[j])
 
-
-
         freshs.append((low, max(high, highs[j])))
         i = j + 1
 
